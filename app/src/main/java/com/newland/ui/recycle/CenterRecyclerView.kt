@@ -13,14 +13,18 @@ import androidx.recyclerview.widget.RecyclerView
  *
  */
 class CenterRecyclerView : RecyclerView {
-    private var mVelocityTracker: VelocityTracker? = null
     private var mLastTouchX = 0
     private var mLastTouchY = 0
     private var mDown = false
     private var mTouchSlop = 0
     private var mScrollPointerId = 0
+    private var mPrePosition = 0
     private var mPosition = 0
     private var mInterceptor = false
+    var mOnTargetItemListener: OnTargetItemListener? = null
+        set(value) {
+            field = value
+        }
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -40,10 +44,6 @@ class CenterRecyclerView : RecyclerView {
     }
 
     override fun onInterceptTouchEvent(e: MotionEvent?): Boolean {
-        if (mVelocityTracker == null) {
-            mVelocityTracker = VelocityTracker.obtain()
-        }
-        mVelocityTracker?.addMovement(e)
         val action = e!!.actionMasked
         val actionIndex = e!!.actionIndex
         when (action) {
@@ -117,12 +117,20 @@ class CenterRecyclerView : RecyclerView {
     }
 
     override fun scrollToPosition(position: Int) {
-        mPosition = position
         super.scrollToPosition(position)
+        mPrePosition = mPosition
+        mPosition = position
+        mOnTargetItemListener?.onTargetItem(position, mPrePosition)
     }
 
     override fun smoothScrollToPosition(position: Int) {
         super.smoothScrollToPosition(position)
+        mPrePosition = mPosition
         mPosition = position
+        mOnTargetItemListener?.onTargetItem(position, mPrePosition)
+    }
+
+    interface OnTargetItemListener {
+        fun onTargetItem(position: Int, prePosition: Int)
     }
 }

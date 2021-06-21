@@ -25,8 +25,12 @@ class MainActivity : AppCompatActivity() {
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
                 centerRecyclerView.smoothScrollToPosition(position)
             }
-
         })
+        centerRecyclerView.mOnTargetItemListener= object : CenterRecyclerView.OnTargetItemListener {
+            override fun onTargetItem(position: Int, prePosition: Int) {
+                
+            }
+        }
         centerRecyclerView.layoutManager = centerLayoutManager
         centerRecyclerView.addItemDecoration(centerItemDecoration)
         centerRecyclerView.adapter = adapter
