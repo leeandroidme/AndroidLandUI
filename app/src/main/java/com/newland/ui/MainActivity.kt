@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val datas = mutableListOf<String>("攝影", "慢動作", "視頻", "照片", "正方形", "全景", "慢動作", "視頻", "照片", "正方形", "全景")
+        val datas = mutableListOf<String>("攝影", "慢動作", "視頻", "照片", "正方形", "全景")
         var centerLayoutManager = CenterLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         var centerItemDecoration = CenterItemDecoration()
         var adapter = MenuAdapter(datas)
