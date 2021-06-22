@@ -3,7 +3,7 @@
 1 定制开发苹果的下面tab
 ![苹果相机](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fmmbiz.qpic.cn%2Fmmbiz_png%2FcibketMByvrZ4MMeVK51mQ7NOQ1A3lfWfiayn4nvj6EXfRFL8GTdkhvjprYaEic7S1wzcZxpPSwricqYSG6icxLJdiaw%2F0%3Fwx_fmt%3Dpng&refer=http%3A%2F%2Fmmbiz.qpic.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626918708&t=3ae7d1f07eaef3f6116ffb78e6010699)
 ```
-val datas = mutableListOf<String>("攝影", "慢動作", "視頻", "照片", "正方形", "全景", "慢動作", "視頻", "照片", "正方形", "全景")
+val datas = mutableListOf<String>("攝影", "慢動作", "視頻", "照片", "正方形", "全景")
 		//居中布局管理器
         var centerLayoutManager = CenterLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         //首尾插入间隔
