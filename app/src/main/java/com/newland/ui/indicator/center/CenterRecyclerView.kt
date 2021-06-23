@@ -1,9 +1,8 @@
-package com.newland.ui.recycle
+package com.newland.ui.indicator.center
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.view.VelocityTracker
 import android.view.ViewConfiguration
 import androidx.recyclerview.widget.RecyclerView
 
@@ -22,9 +21,6 @@ class CenterRecyclerView : RecyclerView {
     private var mPosition = 0
     private var mInterceptor = false
     var mOnTargetItemListener: OnTargetItemListener? = null
-        set(value) {
-            field = value
-        }
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -97,15 +93,17 @@ class CenterRecyclerView : RecyclerView {
         val dx = x - mLastTouchX
         val dy = y - mLastTouchY
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > mTouchSlop) {
-            if (dx < 0 && mPosition < adapter?.itemCount ?: 0 - 1) {
-                mPosition++
-                smoothScrollToPosition(mPosition)
-            } else if (dx > 0 && mPosition > 0) {
-                mPosition--
-                if (mPosition >= adapter?.itemCount ?: 0) {
-                    mPosition = adapter?.itemCount ?: 0
+            adapter?.also { adapter ->
+                var newPosition = mPosition
+                if (dx < 0 && mPosition < adapter.itemCount - 1) {
+                    newPosition = mPosition + 1
+                } else if (dx > 0 && mPosition > 0) {
+                    newPosition = mPosition - 1
+                    if (newPosition < 0) {
+                        return@also
+                    }
                 }
-                smoothScrollToPosition(mPosition)
+                smoothScrollToPosition(newPosition)
             }
             mDown = false
             mInterceptor = true
@@ -117,6 +115,7 @@ class CenterRecyclerView : RecyclerView {
     }
 
     override fun scrollToPosition(position: Int) {
+        if (mPosition == position) return
         super.scrollToPosition(position)
         mPrePosition = mPosition
         mPosition = position
@@ -124,6 +123,7 @@ class CenterRecyclerView : RecyclerView {
     }
 
     override fun smoothScrollToPosition(position: Int) {
+        if (mPosition == position) return
         super.smoothScrollToPosition(position)
         mPrePosition = mPosition
         mPosition = position

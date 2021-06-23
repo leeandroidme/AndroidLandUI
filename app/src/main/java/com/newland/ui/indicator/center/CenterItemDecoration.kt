@@ -1,4 +1,4 @@
-package com.newland.ui.recycle
+package com.newland.ui.indicator.center
 
 import android.graphics.Rect
 import android.view.View
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
  * 主要头尾插入动态宽度使其头尾居中显示
  */
 class CenterItemDecoration : ItemDecoration() {
+    private val measurewidth: Int? = null
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
@@ -26,7 +27,8 @@ class CenterItemDecoration : ItemDecoration() {
                 view.measure(0, 0)
                 childWidth = view.measuredWidth
             }
-            outRect.set(((parentWidth - childWidth + 0.5) / 2).toInt(), 0, 0, 0)
+//            outRect.set(((parentWidth - childWidth + 0.5) / 2).toInt(), 0, 0, 0)
+            outRect.set(parentWidth/ 2, 0, 0, 0)
         } else if (position + 1 == parent.adapter?.itemCount) {
             var parentWidth = parent.measuredWidth
             var childWidth = view.measuredWidth
@@ -34,7 +36,8 @@ class CenterItemDecoration : ItemDecoration() {
                 view.measure(0, 0)
                 childWidth = view.measuredWidth
             }
-            outRect.set(0, 0, ((parentWidth - childWidth + 0.5) / 2).toInt(),0)
+//            outRect.set(0, 0, ((parentWidth - childWidth + 0.5) / 2).toInt(), 0)
+            outRect.set(0, 0, parentWidth/ 2, 0)
         }
     }
 }

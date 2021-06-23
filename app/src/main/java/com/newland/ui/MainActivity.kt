@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.newland.ui.adapter.MenuAdapter
-import com.newland.ui.recycle.CenterItemDecoration
-import com.newland.ui.recycle.CenterLayoutManager
-import com.newland.ui.recycle.CenterRecyclerView
+import com.newland.ui.indicator.center.CenterItemDecoration
+import com.newland.ui.indicator.center.CenterLayoutManager
+import com.newland.ui.indicator.center.CenterRecyclerView
 
 class MainActivity : AppCompatActivity() {
     private val centerRecyclerView: CenterRecyclerView by lazy { findViewById(R.id.centerRecyclerView) }
